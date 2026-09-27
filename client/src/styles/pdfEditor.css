@@ -1,0 +1,294 @@
+/* CYBERPOINTAK PDF Editor Styles */
+
+.pdf-editor-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0F172A;
+  color: #F8FAFC;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* Editor Header / Top Toolbar */
+.editor-header-toolbar {
+  height: 64px;
+  background-color: #1E293B;
+  border-bottom: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  gap: 1rem;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.editor-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.editor-tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background-color: #0F172A;
+  color: #94A3B8;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.editor-tool-btn:hover {
+  background-color: #334155;
+  color: #FFFFFF;
+}
+
+.editor-tool-btn.active {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border-color: #3B82F6;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.4);
+}
+
+.editor-tool-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Main Workspace split into Canvas View & Right Properties Panel */
+.editor-workspace {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Scrollable Document Area */
+.pdf-document-viewer {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background-color: #090D16;
+  position: relative;
+}
+
+/* Single Page Canvas Wrapper */
+.pdf-page-wrapper {
+  position: relative;
+  background-color: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  user-select: none;
+}
+
+.pdf-page-canvas {
+  display: block;
+}
+
+/* Text Overlay Layer */
+.pdf-text-layer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* INVISIBLE Text Detection Box (Fixes Duplicate Text Bug) */
+.invisible-detect-box {
+  opacity: 0;
+  background-color: transparent !important;
+  color: transparent !important;
+  user-select: none;
+  border: 1px transparent dashed;
+  transition: opacity 150ms ease, border-color 150ms ease;
+}
+
+.invisible-detect-box:hover {
+  opacity: 1 !important;
+  border: 1.5px #3B82F6 dashed !important;
+  background-color: rgba(59, 130, 246, 0.08) !important;
+  cursor: text !important;
+}
+
+/* Single Text Item Overlay Box when Selected or Edited */
+.pdf-text-item-box {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  border: 1px transparent dashed;
+  border-radius: 2px;
+  transition: border-color 100ms ease;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.pdf-text-item-box.selected {
+  border: 2px #2563EB solid !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+  z-index: 30;
+}
+
+.pdf-text-item-box.edited {
+  border-color: #10B981;
+}
+
+/* Inline Editable Input */
+.text-item-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: inherit;
+  line-height: 1;
+}
+
+/* Whiteout Shape Overlay */
+.pdf-whiteout-box {
+  position: absolute;
+  background-color: #FFFFFF;
+  border: 1px #CBD5E1 solid;
+  pointer-events: auto;
+  cursor: move;
+  z-index: 15;
+}
+
+.pdf-whiteout-box.selected {
+  border: 2px #EF4444 solid;
+}
+
+/* Right Properties Panel */
+.editor-properties-panel {
+  width: 320px;
+  background-color: #1E293B;
+  border-left: 1px solid #334155;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .editor-workspace {
+    flex-direction: column;
+  }
+  .editor-properties-panel {
+    width: 100%;
+    height: 240px;
+    border-left: none;
+    border-top: 1px solid #334155;
+  }
+}
+
+.panel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94A3B8;
+  margin-bottom: 0.5rem;
+}
+
+.prop-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.prop-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #CBD5E1;
+}
+
+.prop-control-select, .prop-control-input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.88rem;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background-color: #0F172A;
+  color: #F8FAFC;
+  outline: none;
+}
+
+.prop-control-select:focus, .prop-control-input:focus {
+  border-color: #2563EB;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.toggle-prop-btn {
+  flex: 1;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background-color: #0F172A;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.toggle-prop-btn:hover {
+  background-color: #334155;
+  color: #FFFFFF;
+}
+
+.toggle-prop-btn.active {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  border-color: #3B82F6;
+}
+
+.color-swatch-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.color-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #334155;
+  cursor: pointer;
+}
+
+.color-dot.active {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 0 2px #2563EB;
+}
